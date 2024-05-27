@@ -1,0 +1,452 @@
+/* Importamos la fuente cursiva */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* Variables de colores pastel */
+:root {
+    --color-fondo: #fef7ff;
+    --color-principal: #ffb6c1; /* Rosa pastel */
+    --color-secundario: #b0e0e6; /* Turquesa pastel */
+    --color-texto: #333333;
+    --color-acento: #fffaf0; /* Blanco floral */
+    --color-efecto: #ff69b4; /* Hot pink */
+    --color-oscuro: #696969;
+}
+
+body {
+    font-family: 'Great Vibes', cursive;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+nav {
+    background-color: var(--color-principal);
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--color-acento);
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--color-efecto);
+}
+#carta {
+    display: block;
+    width: 300px;
+    height: 200px;
+    margin: 2rem auto;
+    background: url('path/to/your/envelope-image.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+/* Estilos para la animación de la carta */
+#carta:hover {
+    transform: scale(2);
+}
+
+#carta:hover + #textoCarta {
+    display: block;
+    animation: fadeIn 1s ease forwards;
+}
+
+#carta:hover {
+    transform: scale(1.05);
+}
+
+#textoCarta {
+    display: none;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    padding: 2rem;
+}
+
+#textoCarta.visible {
+    display: block;
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/* Estilos para la sección de la carta */
+#carta {
+    display: block;
+    width: 300px;
+    height: 200px;
+    margin: -14rem auto 0; /* Cambio en el margen superior */
+    background: url('path/to/your/envelope-image.png') no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+#textoCarta {
+    display: none;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #555;
+    padding: 1rem;
+    margin-top: -7rem; /* Ajuste para subir el contenido de la carta */
+}
+
+
+/* Corazones flotantes */
+.corazones-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.corazon {
+    width: 1500px;
+    height: 1500px;
+    background: url('https://static.vecteezy.com/system/resources/previews/019/040/249/non_2x/set-of-hearts-free-png.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    animation: flotar 10s infinite;
+    opacity: 0.7;
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-500px) rotate(360deg);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(0) rotate(720deg);
+        opacity: 0.7;
+    }
+}
+
+@keyframes desplazarArribaAbajo {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        top: calc(100vh - 50px); /* Mover a la parte inferior */
+        left: 0;
+        transform: none;
+    }
+}
+
+@keyframes desplazarArriba {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        top: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+@keyframes desplazarAbajo {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        top: calc(100vh - 50px);
+        left: 0;
+        transform: none;
+    }
+}
+
+/* Galería de fotos */
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.galeria picture {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria picture:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Sección de mensajes */
+.mensajes-container {
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.mensaje {
+    margin: 1rem 0;
+    padding: 1rem;
+    background-color: #e6f7ff; /* Azul pastel */
+    border-left: 4px solid #00bfff; /* Azul claro */
+    font-size: 1rem;
+}
+
+header {
+    text-align: center;
+    padding: 50px 0;
+    background: linear-gradient(to bottom, var(--color-principal), var(--color-secundario));
+    color: var(--color-acento);
+}
+
+header h1 {
+    font-size: 3em;
+    margin: 0;
+}
+
+.carta-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    position: relative;
+}
+
+.carta {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.carta:hover {
+    transform: scale(1.1);
+}
+
+.carta img {
+    max-width: 100%;
+    height: auto;
+}
+
+#textoCarta {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-acento);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s, transform 1s;
+}
+
+#textoCarta.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.galeria picture {
+    margin: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.galeria picture:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.galeria img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: var(--color-principal);
+    color: var(--color-acento);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.oculto {
+    display: none;
+}
+
+/* Estilos generales para los poemas */
+.poema {
+    font-family: 'Dancing Script', cursive; /* Asegurarse de usar la fuente correcta */
+    font-style: italic; /* Aplicar cursiva a los textos */
+    margin: 20px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    color: var(--color-oscuro);
+}
+
+/* Estilos para la sección de poemas */
+#poemas {
+    font-family: 'Dancing Script', cursive; /* Asegurarse de usar la fuente correcta */
+    padding: 50px 0;
+    background-color: #f8f8f8;
+    text-align: center;
+}
+
+#poemas h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.poemas-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.poema p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+/* Animaciones de corazones */
+#corazones {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.corazon {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-efecto);
+    transform: scale(0.5);
+    animation: flotar 5s infinite ease-in-out;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-100px) scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(-200px) scale(0.5);
+        opacity: 0;
+    }
+}
+.destellos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 998;
+}
+
+.destello {
+    width: 10px;
+    height: 10px;
+    background: url('path/to/your/twinkle-image.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    animation: destelloAnim 5s infinite;
+    opacity: 0;
+}
+
+@keyframes destelloAnim {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animación de la línea de tiempo */
+.timeline-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optimización para dispositivos móviles */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+
+    .galeria picture {
+        width: 150px;
+        height: 150px;
+    }
+
+    .boton-regresar {
+        font-size: 0.8rem;
+    }
+}
