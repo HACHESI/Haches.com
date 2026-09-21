@@ -392,7 +392,7 @@ html[data-theme="morning"] #vignette,html[data-theme="vintage"] #vignette{
       <button class="chip" id="cardToggleBtn" aria-label="Toggle letter card visibility"><span>✉</span> <span id="cardToggleLabel">Hide Card</span></button>
       <button class="chip" id="replayBtn" aria-label="Replay the bloom">↺ Replay</button>
     </div>
-    <button class="chip" id="createBtn" aria-label="Create your own letter">✿ Create Yours</button>
+    <button class="chip" id="createBtn" aria-label="Create your own letter" hidden style="display:none">✿ Create Yours</button>
   </div>
 </div>
 
@@ -459,9 +459,9 @@ function clean(v, fallback, max){
 }
 const PARAMS = {
   to: clean(qs.get("to"), "My Love", 24),
-  from: clean(qs.get("from"), "Alessio", 24),
+  from: clean(qs.get("from"), "h", 24),
   occasion: clean(qs.get("occasion"), "just because", 40).toLowerCase(),
-  msg: clean(qs.get("msg"), "I couldn't give you flowers|that last forever,|so I grew you a meadow|that never wilts.", 140),
+  msg: clean(qs.get("msg"), "ELLA SABIA QUE EL SABÍA QUE ALGÚN DIA EL PASARÍA QUE VENDRÍA A BUSCARLA CON SUS FLORES AMARILLAS", 140),
   style: CONFIG.themes.includes((qs.get("style")||"").toLowerCase()) ? qs.get("style").toLowerCase() : "midnight"
 };
 PARAMS.lines = PARAMS.msg.split("|").map(s=>s.trim()).filter(Boolean).slice(0,4);
@@ -850,7 +850,7 @@ function createTulip(layer, x0, y0, x1, y1, o={}){
     {rot:24, len:r*1.05, wid:r*.35, op:.95}
   ];
   specs.forEach(s=>{
-    const holder = svgEl("g", {transform:`rotate(${s.rot}deg)`}, live);
+    const holder = svgEl("g", {transform:`rotate(${s.rot})`}, live);
     const p = svgEl("path", {d:tulipPetalPath(s.len, s.wid), fill:"url(#tulipGrad)", opacity:0}, holder);
     p.style.transformBox = "fill-box";
     p.style.transformOrigin = "50% 100%";
@@ -1216,12 +1216,21 @@ async function playSequence(){
   });
 
   await Promise.all(wave.map((f, i) => (async()=>{
-    const dist = Math.abs(f.x - centerX) / (VR.w * 0.5);
-    const stagger = (f.layerRank * 460) + (dist * 650) + R(0, 140);
-    await wait(stagger);
-    await f.grow(R(550, 750));
-    f.bloomHead();
+    try {
+      const dist = Math.abs(f.x - centerX) / (VR.w * 0.5);
+      const stagger = (f.layerRank * 460) + (dist * 650) + R(0, 140);
+      await wait(stagger);
+      await f.grow(R(550, 750));
+      await f.bloomHead();
+    } catch(e) {
+      f.setOpen();
+    }
   })()));
+
+  // Safety net: guarantee every flower (and the hero) ends fully open,
+  // even if an individual bloom animation was interrupted or errored.
+  hero.setOpen();
+  allFlowers.forEach(f => f.setOpen());
 
   // 4. Settling camera & dedication message
   setCam(0.92, 2200);
