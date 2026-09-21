@@ -458,7 +458,7 @@ function clean(v, fallback, max){
   return v.replace(/[<>&"']/g,"").trim() || fallback;
 }
 const PARAMS = {
-  to: clean(qs.get("to"), "My Love", 24),
+  to: clean(qs.get("to"), "Pollito", 24),
   from: clean(qs.get("from"), "h", 24),
   occasion: clean(qs.get("occasion"), "just because", 40).toLowerCase(),
   msg: clean(qs.get("msg"), "ELLA SABIA QUE EL SABÍA QUE ALGÚN DIA EL PASARÍA QUE VENDRÍA A BUSCARLA CON SUS FLORES AMARILLAS", 140),
