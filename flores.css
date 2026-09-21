@@ -1,0 +1,251 @@
+:root {
+    --noche-1: #0b1020;
+    --noche-2: #131a33;
+    --luz-calida: rgba(255, 200, 130, 0.35);
+    --tallo: #4f8a4f;
+    --tallo-oscuro: #2f5c33;
+    --pasto: #2c5334;
+    --texto: #f6f1e7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--noche-1);
+    overflow-x: hidden;
+}
+
+.volver {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 20;
+    color: var(--texto);
+    text-decoration: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+.volver:hover {
+    opacity: 1;
+}
+
+.jardin {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(ellipse at 50% 100%, var(--noche-2) 0%, var(--noche-1) 65%);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.resplandor {
+    position: absolute;
+    left: 50%;
+    bottom: 12%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 700px;
+    max-height: 700px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, var(--luz-calida) 0%, rgba(255, 200, 130, 0) 70%);
+    filter: blur(2px);
+    pointer-events: none;
+    animation: respirar 6s ease-in-out infinite;
+}
+
+@keyframes respirar {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.06); }
+}
+
+.tallos {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.flor {
+    position: absolute;
+    bottom: 6vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+}
+
+.flor .tallo {
+    width: 3px;
+    background: linear-gradient(to top, var(--tallo-oscuro), var(--tallo));
+    border-radius: 2px;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+    animation-name: crecer;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
+    animation-fill-mode: forwards;
+}
+
+.flor .hoja {
+    position: absolute;
+    width: 16px;
+    height: 8px;
+    background: var(--tallo);
+    border-radius: 0 100% 0 100%;
+    opacity: 0;
+    animation-name: hoja-aparece;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.flor .hoja.izq {
+    left: -14px;
+    transform: rotate(20deg);
+    border-radius: 100% 0 100% 0;
+}
+
+.flor .hoja.der {
+    right: -14px;
+    transform: rotate(-20deg) scaleX(-1);
+}
+
+.flor .cabeza {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transform: scale(0.2) rotate(-12deg);
+    animation-name: florecer;
+    animation-timing-function: cubic-bezier(.34, 1.56, .64, 1);
+    animation-fill-mode: forwards;
+}
+
+.flor .cabeza svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: visible;
+    animation: mecerse 4.5s ease-in-out infinite;
+    animation-delay: inherit;
+}
+
+@keyframes crecer {
+    to { transform: scaleY(1); }
+}
+
+@keyframes hoja-aparece {
+    to { opacity: 1; }
+}
+
+@keyframes florecer {
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes mecerse {
+    0%, 100% { transform: translate(-50%, -50%) rotate(-2.5deg); }
+    50% { transform: translate(-50%, -50%) rotate(2.5deg); }
+}
+
+.pasto {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 7vh;
+    z-index: 3;
+    background:
+        repeating-linear-gradient(115deg, transparent 0 6px, rgba(0,0,0,0.15) 6px 7px),
+        linear-gradient(to top, var(--pasto), rgba(44, 83, 52, 0));
+    clip-path: polygon(
+        0% 100%, 0% 40%, 2% 70%, 4% 20%, 6% 60%, 8% 10%, 10% 55%,
+        12% 25%, 14% 65%, 16% 15%, 18% 50%, 20% 30%, 22% 70%,
+        24% 20%, 26% 60%, 28% 10%, 30% 55%, 32% 25%, 34% 65%,
+        36% 15%, 38% 50%, 40% 30%, 42% 70%, 44% 20%, 46% 60%,
+        48% 10%, 50% 55%, 52% 25%, 54% 65%, 56% 15%, 58% 50%,
+        60% 30%, 62% 70%, 64% 20%, 66% 60%, 68% 10%, 70% 55%,
+        72% 25%, 74% 65%, 76% 15%, 78% 50%, 80% 30%, 82% 70%,
+        84% 20%, 86% 60%, 88% 10%, 90% 55%, 92% 25%, 94% 65%,
+        96% 15%, 98% 50%, 100% 30%, 100% 100%
+    );
+}
+
+.dedicatoria {
+    position: relative;
+    z-index: 10;
+    margin-top: 10vh;
+    max-width: 640px;
+    padding: 0 24px;
+    text-align: center;
+    color: var(--texto);
+    font-family: 'Cormorant Garamond', serif;
+    opacity: 0;
+    transform: translateY(-16px);
+    transition: opacity 1.4s ease, transform 1.4s ease;
+    pointer-events: none;
+}
+
+.dedicatoria.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.dedicatoria .eyebrow {
+    letter-spacing: 0.35em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin: 0 0 8px;
+}
+
+.dedicatoria h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.4rem;
+    margin: 0 0 14px;
+    font-weight: 400;
+    color: #fff;
+    text-shadow: 0 0 24px rgba(255, 210, 150, 0.35);
+}
+
+.dedicatoria .nota {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-style: italic;
+    opacity: 0.92;
+    margin: 0 0 24px;
+}
+
+.replantar {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--texto);
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.replantar:hover {
+    background: rgba(255, 255, 255, 0.16);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 600px) {
+    .dedicatoria h1 {
+        font-size: 2.6rem;
+    }
+    .dedicatoria .nota {
+        font-size: 1.05rem;
+    }
+}
